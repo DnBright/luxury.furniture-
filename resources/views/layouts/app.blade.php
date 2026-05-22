@@ -206,21 +206,39 @@
         const header = document.getElementById('main-header');
         const logo = document.querySelector('.logo');
 
+        // Cache initial window width and height to prevent Android/iOS scroll-jumping (address bar collapse)
+        let cachedWidth = window.innerWidth;
+        let cachedHeight = window.innerHeight;
+        let cachedHeaderHeight = header ? header.offsetHeight : 80;
+
+        function handleResize() {
+            // Only update height-related caches if the width changes (e.g., screen rotation)
+            // This prevents address-bar vertical resizing on mobile from causing recalculation loops.
+            if (window.innerWidth !== cachedWidth) {
+                cachedWidth = window.innerWidth;
+                cachedHeight = window.innerHeight;
+                cachedHeaderHeight = header ? header.offsetHeight : 80;
+                updateScrollEffects();
+            }
+        }
+
         function updateScrollEffects() {
             let scrollY = window.scrollY;
-            let maxScroll = 400; // Complete animation after 400px of scrolling
+            let maxScroll = 300; // Snappier, tighter animation
             let progress = Math.min(scrollY / maxScroll, 1);
             
-            let isMobile = window.innerWidth <= 768;
-            let startSize = isMobile ? 3 : 8;
-            let endSize = isMobile ? 1.2 : 1.8;
+            let isMobile = cachedWidth <= 768;
+            let startSize = isMobile ? 2.4 : 8; // Polished starting logo size on mobile
+            let endSize = isMobile ? 1.1 : 1.8;  // Polished ending logo size on mobile
             
-            let startTop = window.innerHeight / 2;
-            let endTop = header.offsetHeight / 2;
+            let startTop = cachedHeight / 2;
+            let endTop = cachedHeaderHeight / 2;
             
             let currentTop = startTop - (startTop - endTop) * progress;
             let currentSize = startSize - (startSize - endSize) * progress;
-            let currentLetterSpacing = -0.02 + (0.42 * progress);
+            let currentLetterSpacing = isMobile 
+                ? -0.01 + (0.24 * progress) // Tighter mobile spacing transition
+                : -0.02 + (0.42 * progress);
             let currentWeight = 600 - (300 * progress);
             
             logo.style.top = currentTop + 'px';
@@ -236,8 +254,15 @@
         }
 
         window.addEventListener('scroll', updateScrollEffects, { passive: true });
-        window.addEventListener('resize', updateScrollEffects, { passive: true });
-        document.addEventListener('DOMContentLoaded', updateScrollEffects);
+        window.addEventListener('resize', handleResize, { passive: true });
+        
+        // Initial setup on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', () => {
+            cachedWidth = window.innerWidth;
+            cachedHeight = window.innerHeight;
+            cachedHeaderHeight = header ? header.offsetHeight : 80;
+            updateScrollEffects();
+        });
 
         // Sidebar Sliding Menu controls
         const sidebar = document.getElementById('sidebar-menu');
