@@ -446,6 +446,66 @@
             e.preventDefault();
             showToast('Search', 'Explore our collections. Type "lena" or "teak" in the inquiry form below.', 'success');
         });
+
+        // =============================================
+        // AUTO-SCROLL COLLECTIONS SLIDER
+        // Smooth infinite loop with pause on hover/touch
+        // =============================================
+        (function initCollectionsAutoScroll() {
+            const slider = document.querySelector('.collections-slider');
+            if (!slider) return;
+
+            const SCROLL_SPEED_PX_PER_TICK = 1.2;   // pixels moved per animation frame (~60fps)
+            const PAUSE_AFTER_END_MS     = 1200;     // pause at end before snapping back
+            const RESUME_DELAY_MS        = 800;       // delay before resuming after user interaction
+
+            let isHovered  = false;
+            let isUserDragging = false;
+            let resumeTimer  = null;
+            let animFrameId  = null;
+
+            function autoScroll() {
+                if (!isHovered && !isUserDragging) {
+                    const maxScroll = slider.scrollWidth - slider.clientWidth;
+
+                    if (slider.scrollLeft >= maxScroll - 2) {
+                        // Reached the end — pause then smoothly snap back
+                        isHovered = true; // temporarily block
+                        setTimeout(() => {
+                            slider.scrollTo({ left: 0, behavior: 'smooth' });
+                            setTimeout(() => { isHovered = false; }, 600);
+                        }, PAUSE_AFTER_END_MS);
+                    } else {
+                        slider.scrollLeft += SCROLL_SPEED_PX_PER_TICK;
+                    }
+                }
+                animFrameId = requestAnimationFrame(autoScroll);
+            }
+
+            // Pause on mouse hover
+            slider.addEventListener('mouseenter', () => { isHovered = true; });
+            slider.addEventListener('mouseleave', () => { isHovered = false; });
+
+            // Pause on touch — resume after user lifts finger
+            slider.addEventListener('touchstart', () => {
+                isUserDragging = true;
+                clearTimeout(resumeTimer);
+            }, { passive: true });
+
+            slider.addEventListener('touchend', () => {
+                resumeTimer = setTimeout(() => { isUserDragging = false; }, RESUME_DELAY_MS);
+            }, { passive: true });
+
+            // Pause when user manually scrolls with mouse wheel
+            slider.addEventListener('wheel', () => {
+                isUserDragging = true;
+                clearTimeout(resumeTimer);
+                resumeTimer = setTimeout(() => { isUserDragging = false; }, RESUME_DELAY_MS);
+            }, { passive: true });
+
+            // Start the animation
+            animFrameId = requestAnimationFrame(autoScroll);
+        })();
     </script>
     @yield('scripts')
 </body>
