@@ -34,9 +34,11 @@
     ],
     "env": {
         "APP_ENV": "production",
-        "APP_DEBUG": "false",
-        "APP_KEY": "base64:YourAppKeyHere",
+        "APP_DEBUG": "true",
+        "APP_KEY": "base64:WHhuSDmIhJtVuUWjIsDB6RCUkgBGGWpRaXc4lgvorSU=",
         "APP_URL": "https://luxury-furniture.vercel.app",
+        "DB_CONNECTION": "sqlite",
+        "DB_DATABASE": "/tmp/database.sqlite",
         "CACHE_DRIVER": "array",
         "SESSION_DRIVER": "cookie",
         "QUEUE_CONNECTION": "sync",

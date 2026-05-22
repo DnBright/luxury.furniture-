@@ -11,6 +11,17 @@ chdir(__DIR__ . '/..');
 // Define storage path writable on Vercel's /tmp
 $_ENV['STORAGE_PATH'] = '/tmp';
 
+// Set up writable SQLite database on serverless /tmp
+if (!file_exists('/tmp/database.sqlite')) {
+    $dbSource = __DIR__ . '/../database/database.sqlite';
+    if (file_exists($dbSource)) {
+        copy($dbSource, '/tmp/database.sqlite');
+    } else {
+        // Fallback to prevent crash
+        touch('/tmp/database.sqlite');
+    }
+}
+
 define('LARAVEL_START', microtime(true));
 
 // Maintenance mode check
