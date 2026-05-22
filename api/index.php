@@ -13,6 +13,12 @@ error_reporting(E_ALL);
 // Set correct working directory to the Laravel root
 chdir(__DIR__ . '/..');
 
+// Clean up any lingering local cache files that might cause 500 errors (like PailServiceProvider)
+@unlink(__DIR__ . '/../bootstrap/cache/packages.php');
+@unlink(__DIR__ . '/../bootstrap/cache/services.php');
+@unlink(__DIR__ . '/../bootstrap/cache/config.php');
+@unlink(__DIR__ . '/../bootstrap/cache/routes.php');
+
 // Define storage path writable on Vercel's /tmp
 $_ENV['STORAGE_PATH'] = '/tmp';
 
