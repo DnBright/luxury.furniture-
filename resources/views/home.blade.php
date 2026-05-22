@@ -142,7 +142,9 @@
                     <div class="contact-details">
                         <div class="contact-detail-item">
                             <span class="contact-detail-label">OFFICE & SHOWROOM</span>
-                            <span class="contact-detail-value">Jalan Sunset Road No. 888, Seminyak, Bali, Indonesia</span>
+                            <span class="contact-detail-value">Klaten keras
+
+                            </span>
                         </div>
                         <div class="contact-detail-item">
                             <span class="contact-detail-label">PHONE INQUIRIES</span>
