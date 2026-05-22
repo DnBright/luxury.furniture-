@@ -31,10 +31,6 @@ if (!file_exists('/tmp/database.sqlite')) {
     }
 }
 
-// Clean up problematic cache files
-@unlink(__DIR__ . '/../bootstrap/cache/packages.php');
-@unlink(__DIR__ . '/../bootstrap/cache/services.php');
-
 define('LARAVEL_START', microtime(true));
 
 if (file_exists($maintenance = __DIR__ . '/../storage/framework/maintenance.php')) {
