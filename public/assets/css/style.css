@@ -1525,3 +1525,241 @@ footer {
         transform: translateY(0);
     }
 }
+
+/* =============================================
+   COMPREHENSIVE MOBILE RESPONSIVE OVERRIDES
+   Android & iOS — max 768px and max 480px
+   ============================================= */
+
+/* --- LOGO: Prevent overflow & clipping on mobile --- */
+@media (max-width: 768px) {
+    .logo {
+        /* Constrain logo so it never overflows the screen */
+        max-width: calc(100vw - 140px); /* leave room for menu/cart icons */
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: clip;
+        text-align: center;
+    }
+    .logo a {
+        display: block;
+        overflow: hidden;
+        text-overflow: clip;
+        white-space: nowrap;
+    }
+}
+
+/* --- HERO: Ensure hero section never causes horizontal scroll --- */
+@media (max-width: 768px) {
+    .hero-carousel {
+        overflow: hidden;
+        /* Use dvh (dynamic viewport height) to handle iOS address-bar correctly */
+        min-height: 100svh;
+    }
+
+    /* Slide caption: readjust for very small screens */
+    .slide-caption {
+        left: 1.2rem;
+        right: 1.2rem;
+        bottom: 8rem;
+        max-width: 100%;
+    }
+    .slide-caption-title {
+        font-size: 1.8rem;
+        letter-spacing: 0.06em;
+        line-height: 1.2;
+    }
+    .slide-caption-sub {
+        font-size: 0.9rem;
+        max-width: 100%;
+    }
+    .slide-caption-btn {
+        padding: 0.8rem 1.6rem;
+        font-size: 0.72rem;
+    }
+
+    /* Carousel controls padding */
+    .carousel-controls {
+        padding: 0 1.2rem 5rem 1.2rem;
+    }
+    .carousel-arrows {
+        gap: 0.6rem;
+    }
+    .carousel-arrow-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* Audio button: don't overlap with carousel controls */
+    .audio-toggle-btn {
+        bottom: 7rem;
+        right: 1.2rem;
+        width: 40px;
+        height: 40px;
+    }
+
+    /* Sidebar: full-width on mobile for better usability */
+    .sidebar {
+        width: 100%;
+        padding: 2rem 1.5rem;
+    }
+    .sidebar-item {
+        font-size: 1.2rem;
+    }
+}
+
+/* --- INSPIRED / COLLECTIONS SECTION --- */
+@media (max-width: 768px) {
+    .inspired-section {
+        padding: 4rem 0;
+    }
+    .inspired-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    .inspired-title {
+        font-size: 1.4rem;
+        max-width: 100%;
+    }
+    .collections-slider {
+        gap: 1.2rem;
+        padding-bottom: 2rem;
+    }
+    .collection-card {
+        flex: 0 0 calc(80vw); /* Show a glimpse of next card */
+        gap: 1rem;
+    }
+}
+
+/* --- STORY SECTION --- */
+@media (max-width: 768px) {
+    .story-section {
+        padding: 4rem 0;
+    }
+    .story-title {
+        font-size: 1.8rem;
+    }
+    .story-info {
+        max-width: 100%;
+    }
+    .story-img-box {
+        height: 280px;
+    }
+    .story-btn {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+}
+
+/* --- CONTACT SECTION --- */
+@media (max-width: 768px) {
+    .contact-section {
+        padding: 4rem 0;
+    }
+    .contact-title {
+        font-size: 1.8rem;
+    }
+    .contact-info {
+        max-width: 100%;
+    }
+    .submit-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* --- DETAIL DRAWER: Full-height, scrollable on mobile --- */
+@media (max-width: 768px) {
+    .detail-drawer {
+        width: 100%;
+        height: 85vh; /* Don't cover full screen — let user see they can dismiss */
+        top: auto;
+        bottom: -100%;
+        right: 0;
+        border-radius: 1.5rem 1.5rem 0 0;
+        transition: bottom var(--transition-slow);
+    }
+    .detail-drawer.active {
+        right: 0;
+        bottom: 0;
+    }
+    .drawer-header {
+        padding: 1.5rem 1.5rem;
+    }
+    .drawer-content {
+        padding: 1.5rem;
+        gap: 2rem;
+    }
+    .drawer-product-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .drawer-product-img {
+        width: 100%;
+        height: 200px;
+    }
+}
+
+/* --- SEARCH PANEL: Full-width on mobile --- */
+@media (max-width: 768px) {
+    .search-panel {
+        padding: 5rem 1.5rem 2rem 1.5rem;
+    }
+    .search-input {
+        font-size: 1.4rem;
+    }
+}
+
+/* --- FOOTER: Tighter on very small screens --- */
+@media (max-width: 480px) {
+    footer {
+        padding: 3rem 1.2rem 2rem 1.2rem;
+    }
+    .footer-top {
+        gap: 2rem;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        gap: 0.8rem;
+        text-align: center;
+    }
+    .footer-brand-title {
+        font-size: 1rem;
+    }
+}
+
+/* --- TOUCH TARGET SIZES: Ensure all interactive elements are at least 44x44px (WCAG) --- */
+@media (max-width: 768px) {
+    .menu-btn,
+    .search-btn,
+    .cart-icon,
+    .carousel-arrow-btn,
+    .audio-toggle-btn,
+    .sidebar-close,
+    .drawer-close {
+        min-width: 44px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* --- SEARCH PANEL MOBILE --- */
+@media (max-width: 768px) {
+    .search-panel {
+        padding: 4.5rem 1.5rem 2rem;
+    }
+}
+
+/* --- PREVENT HORIZONTAL SCROLL GLOBALLY ON MOBILE --- */
+@media (max-width: 768px) {
+    html, body {
+        overflow-x: hidden;
+        max-width: 100vw;
+    }
+}

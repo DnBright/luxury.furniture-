@@ -245,6 +245,8 @@
             logo.style.fontSize = currentSize + 'rem';
             logo.style.letterSpacing = currentLetterSpacing + 'em';
             logo.style.fontWeight = currentWeight;
+            // Prevent logo from overflowing the header on mobile
+            logo.style.maxWidth = isMobile ? 'calc(100vw - 140px)' : 'none';
 
             if (scrollY > 50) {
                 header.classList.add('scrolled');
