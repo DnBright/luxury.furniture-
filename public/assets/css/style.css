@@ -1599,34 +1599,37 @@ footer {
         height: 40px;
     }
 
-    /* Sidebar: full-width on mobile for better usability */
+    /* Sidebar: elegant drawer on mobile rather than full-screen block */
     .sidebar {
-        width: 100%;
-        max-width: 100%;
+        width: 80%;
+        max-width: 320px;
         height: 100vh;
         height: 100svh;
-        padding: 2.5rem 2rem 3rem 2rem;
+        padding: 2rem 1.5rem;
         overflow-y: auto;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        gap: 2.5rem;
+        gap: 1.5rem;
         -webkit-overflow-scrolling: touch; /* smooth momentum scrolling on iOS */
     }
     .sidebar-menu {
-        gap: 1rem;
+        gap: 0.5rem;
     }
     .sidebar-item {
-        font-size: 1.3rem;
-        padding: 0.8rem 0;
+        font-size: 1rem;
+        font-weight: 400;
+        letter-spacing: 0.12em;
+        padding: 0.6rem 0;
     }
     .sidebar-close {
-        margin-bottom: 0;
+        margin-bottom: 0.5rem;
         align-self: flex-end; /* Align close button to the right for easier thumb access on mobile */
+        font-size: 1.8rem;
     }
     .sidebar-footer {
         margin-top: auto;
-        padding-top: 1.5rem;
+        padding-top: 1rem;
     }
 }
 
