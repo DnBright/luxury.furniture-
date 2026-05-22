@@ -5,6 +5,11 @@
  * Routes all requests through Laravel's HTTP kernel
  */
 
+// Enable raw error reporting for serverless debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Set correct working directory to the Laravel root
 chdir(__DIR__ . '/..');
 
